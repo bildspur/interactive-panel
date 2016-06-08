@@ -8,5 +8,5 @@ void setupSyphon()
 void sendImageToSyphon()
 {
   updatePixels();
-  syphon.sendImage(g);
+  syphon.sendScreen();
 }

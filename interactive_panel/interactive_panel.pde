@@ -58,6 +58,10 @@ void keyPressed() {
     shutdown();
     break;
 
+  case 32:
+    saveFrame("test.png");
+    break;
+
   default:
     println("Key: " + keyCode);
   }
@@ -68,7 +72,7 @@ void switchScene(int sceneShift)
   scenes.get(activeScene).stop();
   activeScene = (activeScene + sceneShift) % scenes.size();
   scenes.get(activeScene).init();
-  
+
   println("switched scene to " + scenes.get(activeScene).getName());
 }
 
