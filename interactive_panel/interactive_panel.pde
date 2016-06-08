@@ -25,6 +25,7 @@ void setup()
 
   // set default active scene
   activeScene = 0;
+  scenes.get(activeScene).init();
 }
 
 void draw()
@@ -38,7 +39,8 @@ void draw()
   sendImageToSyphon();
 
   // draw information
-  text("Scene: " + s.getName(), 5, 15);
+  resetShader();
+  text("Scene " + activeScene + ": " + s.getName(), 5, 15);
 }
 
 void keyPressed() {
