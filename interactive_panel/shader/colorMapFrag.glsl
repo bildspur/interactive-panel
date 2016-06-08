@@ -3,10 +3,13 @@ precision mediump float;
 precision mediump int;
 #endif
 
-uniform float inputX;
-uniform float inputY;
-uniform float inputZ;
+uniform float time;
+
+uniform vec2 resolution;
+uniform vec3 hand;
 
 void main() {
-  gl_FragColor = vec4(inputZ, inputX, inputY, 1);
+  vec2 uv = gl_FragCoord.xy / resolution.xy;
+  vec2 mouse = hand.xy / resolution.xy;
+  gl_FragColor = vec4(uv,0.5+0.5*sin(time),1.0);
 }

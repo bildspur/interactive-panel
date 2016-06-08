@@ -30,27 +30,23 @@ class ColorMapScene extends Scene
 
     // default strength
     float strength = 1.0;
-    float inputX = 0;
-    float inputY = 0;
+    float inputX = mouseX;
+    float inputY = mouseY;
 
     // set variables
     Frame f  = getFrame();
-    if (!f.hands().isEmpty())
+    if (f != null && !f.hands().isEmpty())
     {
       Hand h = f.hands().leftmost(); 
       strength = h.grabStrength();
-      inputX = h.palmPosition().normalized().getX();
-      inputY = h.palmPosition().normalized().getY();
+      inputX = h.palmPosition().getX();
+      inputY = h.palmPosition().getY();
     }
 
-    /*
-    colorShader.set("inputX", map(mouseX, 0, width, 0, 1));
-     colorShader.set("inputY", map(mouseY, 0, height, 0, 1));
-     */
-     
-    colorShader.set("inputX", inputX);
-    colorShader.set("inputY", inputY);
-    colorShader.set("inputZ", strength);
+    // set unform types
+    colorShader.set("hand", inputX, inputY, strength);
+    colorShader.set("time", (float)(millis() / 1000.0));
+    colorShader.set("resolution", (float)width, (float)height);
 
     shader(colorShader);
     shape(plane);
