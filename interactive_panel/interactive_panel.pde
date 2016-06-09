@@ -6,7 +6,7 @@ int activeScene = 0;
 
 void settings()
 {
-  size(500, 500, P3D);
+  size(640, 480, P3D);
   PJOGL.profile = 1;
 }
 
@@ -22,6 +22,8 @@ void setup()
   // init scenes
   scenes = new ArrayList<Scene>();
   scenes.add(new ColorMapScene());
+  scenes.add(new ColorBlobsScene());
+  scenes.add(new ColorCircleScene());
 
   // set default active scene
   activeScene = 0;
@@ -40,7 +42,10 @@ void draw()
 
   // draw information
   resetShader();
+   
+  textSize(12);
   text("Scene " + activeScene + ": " + s.getName(), 5, 15);
+  text("FPS: " + round(frameRate), 5, 30);
 }
 
 void keyPressed() {
@@ -70,7 +75,8 @@ void keyPressed() {
 void switchScene(int sceneShift)
 {
   scenes.get(activeScene).stop();
-  activeScene = (activeScene + sceneShift) % scenes.size();
+  int newSceneNr = (activeScene + sceneShift) % scenes.size();
+  activeScene = newSceneNr < 0 ? scenes.size()-1 : newSceneNr;
   scenes.get(activeScene).init();
 
   println("switched scene to " + scenes.get(activeScene).getName());

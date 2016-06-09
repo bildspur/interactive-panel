@@ -1,5 +1,3 @@
-
-
 class ColorMapScene extends Scene
 {
   PShader colorShader;
