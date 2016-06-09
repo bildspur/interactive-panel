@@ -7,6 +7,6 @@ void setupSyphon()
 
 void sendImageToSyphon()
 {
-  updatePixels();
+  loadPixels();
   syphon.sendScreen();
 }
